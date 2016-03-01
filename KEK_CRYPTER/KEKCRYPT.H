@@ -20,9 +20,21 @@ typedef struct
   int keylen;
 } KEY;
 
+/* Generate key function */
 KEY KeyGen(char *Key);
-char *LoadFile(char *FileName, int *len);
-int SaveFile(char *FileName, char *str, int len);
+
+/* Load key function */
 KEY LoadKey(char *FileName);
+
+/* Save key function */
 int SaveKey(char *FileName, KEY Key);
-char *Crypt(char *input, KEY Key, int len);
+
+/* Cript function */
+char * Crypt(char *input, KEY Key, int len);
+
+
+/* Load file function */
+char * LoadFile(char *FileName, int *len);
+
+/* Save file function */
+int SaveFile(char *FileName, char *str, int len);

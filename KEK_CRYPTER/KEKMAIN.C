@@ -21,7 +21,7 @@
 
 #include "KEKCRYPT.H"
 
-int main(int Argc, char *Argv[])
+int main( int Argc, char *Argv[] )
 {
   char *i = NULL, *o = NULL;
   char key[256], Fname[256];
@@ -72,7 +72,7 @@ int main(int Argc, char *Argv[])
       return 0;
     }
 
-    printf("Enter file name to save key ");
+    printf("Enter file name to load key ");
     scanf("%s", Fname);
     GenKey = LoadKey(Fname);
 

@@ -24,13 +24,18 @@
 
 #include "KEKCRYPT.H"
 
+/* Generate key function */
 KEY KeyGen( char *Key )
 {
   int i = 0, j = 0,
-    time[20],
-    keylen = 0, keylen_mem;
-  int settime, settime_mem,
-    systeminfo, systeminfo_mas[20];
+      time[20],
+      keylen = 0,
+      keylen_mem;
+
+  int settime,
+      settime_mem,
+      systeminfo,
+      systeminfo_mas[20];
   POINT Cursor_pos;
   KEY OutKey;
 
@@ -67,9 +72,10 @@ KEY KeyGen( char *Key )
     OutKey.key[keylen_mem] = Key[keylen_mem--] ^ time[i++];
   }
   return OutKey;
-}
+} /* End of 'KeyGen' function */
 
-char *LoadFile( char *FileName, int *len )
+/* Load file function */
+char * LoadFile( char *FileName, int *len )
 {
   int ch;
   FILE *F;
@@ -95,8 +101,9 @@ char *LoadFile( char *FileName, int *len )
   str[*len] = 0;
   fclose(F);
   return str;
-}
+} /* End of 'LoadFile' function */
 
+/* Save file function */
 int SaveFile( char *FileName, char *str, int len )
 {
   int i = 0;
@@ -116,8 +123,9 @@ int SaveFile( char *FileName, char *str, int len )
   fwrite(str, sizeof(char), len, F);
   fclose(F);
   return 1;
-}
+} /* End of 'SaveFile' function */
 
+/* Load key function */
 KEY LoadKey( char *FileName )
 {
   int ch;
@@ -133,13 +141,15 @@ KEY LoadKey( char *FileName )
   Key.keylen = 0;
   while ((ch = fgetc(F)) != EOF)
     Key.keylen++;
+
   rewind(F);
   fread(Key.key, 1, Key.keylen, F);
   Key.key[Key.keylen + 1] = 0;
   fclose(F);
   return Key;
-}
+} /* End of 'LoadKey' function */
 
+/* Save key function */
 int SaveKey( char *FileName, KEY Key )
 {
   int i = 0;
@@ -154,9 +164,10 @@ int SaveKey( char *FileName, KEY Key )
   fwrite(Key.key, sizeof(char), Key.keylen, F);
   fclose(F);
   return 1;
-}
+} /* End of 'SaveKey' function */
 
-char *Crypt( char *input, KEY Key, int len )
+/* Cript function */
+char * Crypt( char *input, KEY Key, int len )
 {
   int j, i;
   char *output = NULL;
@@ -169,4 +180,4 @@ char *Crypt( char *input, KEY Key, int len )
     output[i] = input[i] ^ Key.key[j];
   }
   return output;
-}
+} /* End of 'Crypt' function */
